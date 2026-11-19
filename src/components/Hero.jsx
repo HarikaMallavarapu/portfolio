@@ -58,7 +58,7 @@ export default function Hero({ ready }) {
     <section className="hero" id="top" ref={root}>
       <div className="hr-grid">
         <div className="hr-copy">
-          <p className="hr-hello hand">Hi there, I’m <span aria-hidden="true">👋</span></p>
+          <p className="hr-hello hand">Hi there, I’m <span className="hr-wave-hand" aria-hidden="true">👋</span></p>
           <h1 className="hr-name">
             <span className="hr-name-text">{profile.name.split('').map((c, i) => <span className="ch-mask" key={i}><span className="ch">{c}</span></span>)}</span>
             <Squiggle />
