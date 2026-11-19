@@ -7,10 +7,20 @@ const links = [['About', '#about'], ['Work', '#work'], ['Journey', '#journey'], 
 export default function Nav({ ready }) {
   const ref = useRef(null)
   const [open, setOpen] = useState(false)
-  useEffect(() => { if (ready) gsap.from(ref.current, { y: -80, opacity: 0, duration: 1.1, delay: 0.3 }) }, [ready])
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    if (ready) gsap.from(ref.current, { y: -80, opacity: 0, duration: 1.1, delay: 0.3 })
+    const onScroll = () => {
+      setScrolled(window.scrollY > 30)
+    }
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [ready])
+
   const go = (e, h) => { e.preventDefault(); setOpen(false); goTo(h) }
   return (
-    <header className={`nav ${open ? 'is-open' : ''}`} ref={ref}>
+    <header className={`nav ${open ? 'is-open' : ''} ${scrolled ? 'is-scrolled' : ''}`} ref={ref}>
       <a href="#top" className="nav-brand" onClick={(e) => go(e, '#top')}>
         <img src={profile.avatar} alt="" />
         <span>{profile.name.toLowerCase()}<em>.</em></span>
