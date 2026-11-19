@@ -12,8 +12,8 @@ export const profile = {
   location: 'Ongole, Andhra Pradesh, India',
   email: 'harikamallavarapu04@gmail.com',
   intro: 'I build intelligent AI applications and data solutions in Python, from Ollama RAG chatbots to K-Means recommendation engines.',
-  github: 'https://github.com/harikamallavarapu04',
-  linkedin: 'https://www.linkedin.com/search/results/all/?keywords=Harika%20Mallavarapu',
+  github: 'https://github.com/HarikaMallavarapu/portfolio',
+  linkedin: 'https://www.linkedin.com/in/harikamallavarapu',
   resume: 'resume.pdf',
   avatar: 'img/faces/smile.jpg',
 }
@@ -50,7 +50,7 @@ export const projects = [
     visual: 'heatmap',
     text: 'A unified platform aggregating property listings from OLX and 99acres with an Ollama-based RAG chatbot and interactive Leaflet.js map with hover markers.',
     tech: ['Python', 'React', 'LLMs', 'Ollama', 'RAG', 'Leaflet.js'],
-    link: 'https://github.com/harikamallavarapu04',
+    link: 'https://github.com/HarikaMallavarapu/portfolio',
     color: '#FFE5D9',
   },
   {
@@ -59,7 +59,7 @@ export const projects = [
     visual: 'gauge',
     text: 'A geospatial recommendation system that categorizes accommodation and restaurant options for migrants using K-Means clustering across budget, facilities, and distance.',
     tech: ['Python', 'K-Means', 'Scikit-Learn', 'Pandas', 'NumPy'],
-    link: 'https://github.com/harikamallavarapu04',
+    link: 'https://github.com/HarikaMallavarapu/portfolio',
     color: '#FFD9CC',
   },
   {
@@ -68,7 +68,7 @@ export const projects = [
     visual: 'outfit',
     text: 'An intelligent retrieval-augmented generation assistant leveraging local LLMs via Ollama to provide context-aware query responses, document QA, and property guidance.',
     tech: ['Python', 'Ollama', 'RAG', 'Prompt Tuning', 'Vector Search'],
-    link: 'https://github.com/harikamallavarapu04',
+    link: 'https://github.com/HarikaMallavarapu/portfolio',
     color: '#FFEDE5',
   },
 ]
