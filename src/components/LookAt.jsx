@@ -1,47 +1,62 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { gsap } from '../lib/motion'
+import heroPortraitDefault from '../assets/hero-portrait.webp'
 
-const BASE = import.meta.env.BASE_URL
+const BASE = import.meta.env.BASE_URL || '/'
 
-/**
- * The cut-out turns to look toward the visitor's cursor (it stays still until
- * the cursor moves). Frames [from..to] map to how far left the cursor is.
- */
-export default function LookAt({ from, to, className = "", label = "Portrait" }) {
+export default function LookAt({ from, to, className = "", label = "Portrait", fallback = heroPortraitDefault }) {
   const cv = useRef(null)
   const imgs = useRef([])
-  const st = useRef({ cur: 0, target: 0, drawn: -1 })
+  const st = useRef({ cur: 0.5, target: 0.5, drawn: -1 })
+  const [loaded, setLoaded] = useState(false)
 
   useEffect(() => {
     const dir = innerWidth < 820 ? 'sm' : 'lg'
+    const b = BASE.endsWith('/') ? BASE : `${BASE}/`
+    let loadedCount = 0
+
     for (let i = from; i <= to; i++) {
       const im = new Image()
-      im.src = `${BASE}img/stickers/${dir}/f${String(i).padStart(3, '0')}.webp`
-      im.onload = () => { st.current.drawn = -1 }
+      im.src = `${b}img/stickers/${dir}/f${String(i).padStart(3, '0')}.webp`
+      im.onload = () => {
+        loadedCount++
+        if (loadedCount >= 1) setLoaded(true)
+        st.current.drawn = -1
+      }
       imgs.current[i - from] = im
     }
+
     const c = cv.current
+    if (!c) return
     const dpr = Math.min(devicePixelRatio || 1, 2)
-    const ro = new ResizeObserver(() => { c.width = c.clientWidth * dpr; c.height = c.clientHeight * dpr; st.current.drawn = -1 })
+    const setSize = () => {
+      if (!c.clientWidth || !c.clientHeight) return
+      c.width = c.clientWidth * dpr
+      c.height = c.clientHeight * dpr
+      st.current.drawn = -1
+    }
+    setSize()
+    const ro = new ResizeObserver(setSize)
     ro.observe(c)
+
     const move = (e) => {
       const r = c.getBoundingClientRect()
       const cx = r.left + r.width / 2
-      // cursor to her left (screen-left) → she turns to look at it
       st.current.target = Math.min(1, Math.max(0, (cx - e.clientX) / (r.width * 1.1)))
     }
-    const leave = () => { st.current.target = 0 }
+    const leave = () => { st.current.target = 0.5 }
     addEventListener('pointermove', move)
     document.addEventListener('pointerleave', leave)
+
     const tick = () => {
       const s = st.current
       s.cur += (s.target - s.cur) * 0.08
       const n = to - from
       const idx = Math.round(s.cur * n)
-      if (idx === s.drawn) return
+      if (idx === s.drawn && c.width > 0) return
       let im = imgs.current[idx]
       if (!im?.complete || !im.naturalWidth) im = imgs.current.find((x) => x?.complete && x.naturalWidth)
-      if (!im) return
+      if (!im || !c.width || !c.height) return
       s.drawn = idx
       const ctx = c.getContext('2d')
       const k = Math.min(c.width / im.naturalWidth, c.height / im.naturalHeight)
@@ -49,9 +64,25 @@ export default function LookAt({ from, to, className = "", label = "Portrait" })
       ctx.clearRect(0, 0, c.width, c.height)
       ctx.drawImage(im, (c.width - w) / 2, c.height - h, w, h)
     }
+
     gsap.ticker.add(tick)
-    return () => { gsap.ticker.remove(tick); ro.disconnect(); removeEventListener('pointermove', move); document.removeEventListener('pointerleave', leave) }
+    return () => {
+      gsap.ticker.remove(tick)
+      ro.disconnect()
+      removeEventListener('pointermove', move)
+      document.removeEventListener('pointerleave', leave)
+    }
   }, [from, to])
 
-  return <canvas ref={cv} className={className} aria-label={label} role="img" />
+  return (
+    <div className={`hr-person-wrap ${className}`}>
+      <img
+        src={fallback}
+        alt={label}
+        className={`hr-fallback-img ${loaded ? 'is-hidden' : ''}`}
+        loading="eager"
+      />
+      <canvas ref={cv} className="hr-canvas" aria-label={label} role="img" />
+    </div>
+  )
 }

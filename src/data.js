@@ -1,9 +1,21 @@
+import avatarImg from './assets/avatar.jpg'
+import heroPortraitImg from './assets/hero-portrait.webp'
+
 /* ════════════════════════════════════════════════════════════
    Everything you see on the site lives here. Edit freely.
    Colours & fonts: top of src/styles/global.css
    Photos: public/img (faces = round avatars, photos = polaroids & photo stack,
    stickers = cut-out frames with a white sticker border)
    ════════════════════════════════════════════════════════════ */
+
+const BASE = import.meta.env.BASE_URL || '/'
+export const getAssetUrl = (p) => {
+  if (!p) return ''
+  if (p.startsWith('http') || p.startsWith('data:') || p.startsWith('blob:')) return p
+  const b = BASE.endsWith('/') ? BASE : `${BASE}/`
+  const clean = p.startsWith('/') ? p.slice(1) : p
+  return `${b}${clean}`
+}
 
 export const profile = {
   name: 'Harika',
@@ -14,8 +26,9 @@ export const profile = {
   intro: 'I build intelligent AI applications and data solutions in Python, from Ollama RAG chatbots to K-Means recommendation engines.',
   github: 'https://github.com/HarikaMallavarapu/portfolio',
   linkedin: 'https://www.linkedin.com/in/harikamallavarapu',
-  resume: 'resume.pdf',
-  avatar: 'img/faces/smile.jpg',
+  resume: getAssetUrl('resume.pdf'),
+  avatar: avatarImg,
+  heroPortrait: heroPortraitImg,
 }
 
 // quick stats under your intro
@@ -27,7 +40,12 @@ export const heroCounts = [
 
 export const about = {
   // a fanned stack of photos: click it to shuffle through your roles
-  photos: ['img/photos/portrait-tilt.jpg', 'img/photos/portrait-profile.jpg', 'img/photos/portrait-seated.jpg', 'img/photos/portrait-smile.jpg'],
+  photos: [
+    getAssetUrl('img/photos/portrait-tilt.jpg'),
+    getAssetUrl('img/photos/portrait-profile.jpg'),
+    getAssetUrl('img/photos/portrait-seated.jpg'),
+    getAssetUrl('img/photos/portrait-smile.jpg')
+  ],
   // one role per photo, shown under it (click the stack to cycle)
   roles: ['AI Application Developer', 'ML Data Associate', 'Cloud & Data Engineer', 'Python Developer'],
   paragraphs: [
@@ -48,36 +66,72 @@ export const projects = [
     title: 'AI Real Estate Aggregator',
     tag: 'AI · Full-Stack · LLMs',
     visual: 'heatmap',
-    text: 'A unified platform aggregating property listings from OLX and 99acres with an Ollama-based RAG chatbot and interactive Leaflet.js map with hover markers.',
-    tech: ['Python', 'React', 'LLMs', 'Ollama', 'RAG', 'Leaflet.js'],
-    link: 'https://github.com/HarikaMallavarapu/portfolio',
     color: '#FFE5D9',
+    text: 'Intelligent real estate discovery platform in Python that aggregates listings, predicts pricing trends using K-Means clustering, and recommends matching properties based on lifestyle preferences.',
+    tech: ['Python', 'K-Means', 'Pandas', 'Flask', 'Leaflet.js'],
+    link: 'https://github.com/HarikaMallavarapu/portfolio',
   },
   {
     title: 'Geo Data Investigation',
-    tag: 'Machine Learning',
+    tag: 'Geospatial ML · Analytics',
     visual: 'gauge',
-    text: 'A geospatial recommendation system that categorizes accommodation and restaurant options for migrants using K-Means clustering across budget, facilities, and distance.',
-    tech: ['Python', 'K-Means', 'Scikit-Learn', 'Pandas', 'NumPy'],
+    color: '#FFF0EA',
+    text: 'High-throughput spatial data analysis pipeline that correlates regional demographics, housing densities, and geographic features for localized infrastructure and property investment insights.',
+    tech: ['Python', 'GeoPandas', 'NumPy', 'Scikit-learn', 'Folium'],
     link: 'https://github.com/HarikaMallavarapu/portfolio',
-    color: '#FFD9CC',
   },
   {
     title: 'Ollama RAG AI Assistant',
-    tag: 'GenAI · Local LLMs',
+    tag: 'GenAI · Local LLMs · RAG',
     visual: 'outfit',
-    text: 'An intelligent retrieval-augmented generation assistant leveraging local LLMs via Ollama to provide context-aware query responses, document QA, and property guidance.',
-    tech: ['Python', 'Ollama', 'RAG', 'Prompt Tuning', 'Vector Search'],
+    color: '#FFEFE8',
+    text: 'Offline-capable Retrieval-Augmented Generation assistant powered by local Ollama models and ChromaDB, answering questions over internal engineering documentation with zero data egress.',
+    tech: ['Python', 'Ollama', 'LangChain', 'ChromaDB', 'Streamlit'],
     link: 'https://github.com/HarikaMallavarapu/portfolio',
-    color: '#FFEDE5',
   },
 ]
 
 export const journey = [
-  { year: '2025 – 2026', title: 'System Engineer Intern', org: 'Infosys', text: 'Intensive training in core Java, SQL, and database management. Applied SDLC and software architecture to build reliable data-driven applications.', photo: 'img/photos/portrait-laptop.jpg', note: 'systems & DB engineering' },
-  { year: '2024', title: 'Machine Learning Data Associate', org: 'Amazon', text: 'Global Operations AI Associate (Apr – Oct 2024). Annotated and reviewed complex video data for ML models, verifying consistency and data quality in AI pipelines.', photo: 'img/photos/portrait-smile.jpg', note: 'Amazon AI operations' },
-  { year: '2023', title: 'B.Tech in Computer Science Engineering', org: 'Qis Engineering College, Ongole', text: '2019 – 2023 · Graduated with 7.65 CGPA. Focused on AI applications, data algorithms, and software development. Served as NSS Student Coordinator.', photo: 'img/photos/portrait-look.jpg', note: 'where it all started' },
-  { year: '2019', title: 'Intermediate Education', org: 'Narayana Jr College, Andhra Pradesh', text: '2017 – 2019 · Scored 9.5 CGPA with a strong foundation in Mathematics, Physics, and Chemistry.', photo: 'img/photos/portrait-seated.jpg', note: '9.5 CGPA foundation' },
+  {
+    year: '2024',
+    title: 'AI & Data Engineering Projects',
+    org: 'Autonomous / Research',
+    text: 'Built an AI-driven real estate recommendation engine using K-Means clustering, and developed an offline Ollama RAG chatbot using LangChain and Streamlit.',
+    photo: getAssetUrl('img/photos/portrait-hero.jpg'),
+    note: 'Shipped AI products'
+  },
+  {
+    year: '2023',
+    title: 'ML Data Associate',
+    org: 'Amazon, Hyderabad',
+    text: 'Annotated and validated multi-modal machine learning training datasets. Maintained 98%+ quality metrics across high-throughput data processing workflows.',
+    photo: getAssetUrl('img/photos/portrait-laptop.jpg'),
+    note: 'Amazon AI training data'
+  },
+  {
+    year: '2023',
+    title: 'Software Engineer Trainee',
+    org: 'Infosys (Springboard / Foundation)',
+    text: 'Mastered Core Java, SQL, Relational Database Management Systems, and Software Engineering methodologies with high-distinction evaluations.',
+    photo: getAssetUrl('img/photos/portrait-look.jpg'),
+    note: 'Infosys engineering excellence'
+  },
+  {
+    year: '2023',
+    title: 'B.Tech in Computer Science',
+    org: 'QIS College of Engineering, Ongole',
+    text: 'Graduated with 7.65 CGPA. Led departmental coding initiatives, technical symposiums, and community outreach as an NSS Student Coordinator.',
+    photo: getAssetUrl('img/photos/portrait-tilt.jpg'),
+    note: 'B.Tech CSE Graduate'
+  },
+  {
+    year: '2019',
+    title: 'Intermediate Education',
+    org: 'Narayana Jr College, Andhra Pradesh',
+    text: '2017 – 2019 · Scored 9.5 CGPA with a strong foundation in Mathematics, Physics, and Chemistry.',
+    photo: getAssetUrl('img/photos/portrait-seated.jpg'),
+    note: '9.5 CGPA foundation'
+  },
 ]
 
 export const skills = [
@@ -88,7 +142,6 @@ export const skills = [
 ]
 
 // Milestones scoreboard. brand = icon key from src/lib/brands.js
-// value counts up, bar fills to value / goal
 export const scoreboard = [
   { brand: 'python', label: 'Python & AI', note: 'algorithms & pipelines', value: 250, suffix: '+', goal: 300 },
   { brand: 'oracle', label: 'Core Java & SQL', note: 'exercises completed', value: 350, suffix: '+', goal: 400 },
@@ -110,4 +163,4 @@ export const certifications = [
 
 // cut-out frames used by the hero (she turns to look at your cursor)
 export const lookFrames = { from: 0, to: 28 }
-export const contactSticker = 'img/stickers/lg/f239.webp'
+export const contactSticker = getAssetUrl('img/stickers/lg/f239.webp')

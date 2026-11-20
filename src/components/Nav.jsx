@@ -57,7 +57,7 @@ export default function Nav({ ready }) {
       <div className={`nav ${open ? 'is-open' : ''} ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="nav-bar">
           <a href="#top" className="nav-brand" onClick={(e) => go(e, '#top')}>
-            <img src={profile.avatar} alt={profile.name} />
+            <img src={profile.avatar} alt={profile.name} className="nav-avatar-img" />
             <span>{profile.name.toLowerCase()}<em>.</em></span>
           </a>
 

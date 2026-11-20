@@ -22,10 +22,11 @@ export default function App() {
     startScroll()
     const dir = innerWidth < 820 ? 'sm' : 'lg'
     const t0 = performance.now()
+    const b = (BASE || '/').endsWith('/') ? (BASE || '/') : `${BASE || '/'}/`
     Promise.all([
       document.fonts?.ready,
-      load(BASE + profile.avatar),
-      load(`${BASE}img/stickers/${dir}/f${String(lookFrames.from).padStart(3, '0')}.webp`),
+      load(profile.avatar),
+      load(`${b}img/stickers/${dir}/f${String(lookFrames.from).padStart(3, '0')}.webp`),
     ]).then(() => setTimeout(() => setLoaded(true), Math.max(0, 1500 - (performance.now() - t0))))
   }, [])
 
