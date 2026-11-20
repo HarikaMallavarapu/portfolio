@@ -2,10 +2,7 @@ import avatarImg from './assets/avatar.jpg'
 import heroPortraitImg from './assets/hero-portrait.webp'
 
 /* ════════════════════════════════════════════════════════════
-   Everything you see on the site lives here. Edit freely.
-   Colours & fonts: top of src/styles/global.css
-   Photos: public/img (faces = round avatars, photos = polaroids & photo stack,
-   stickers = cut-out frames with a white sticker border)
+   Data source of truth: strictly derived from Harika Mallavarapu's resume.
    ════════════════════════════════════════════════════════════ */
 
 const BASE = import.meta.env.BASE_URL || '/'
@@ -21,9 +18,9 @@ export const profile = {
   name: 'Harika',
   full: 'Harika Mallavarapu',
   role: 'AI & Data Solutions Engineer',
-  location: 'Ongole, Andhra Pradesh, India',
+  location: 'Ongole, Prakasam, Andhra Pradesh',
   email: 'harikamallavarapu04@gmail.com',
-  intro: 'I build intelligent AI applications and data solutions in Python, from Ollama RAG chatbots to K-Means recommendation engines.',
+  intro: 'Computer Science graduate (B.Tech, 2023) who builds AI applications in Python, including an Ollama-based RAG chatbot and a K-Means recommendation engine. Hands-on experience with ML training data at Amazon and Java, SQL, and database management at Infosys.',
   github: 'https://github.com/HarikaMallavarapu/portfolio',
   linkedin: 'https://www.linkedin.com/in/harikamallavarapu',
   resume: getAssetUrl('resume.pdf'),
@@ -31,136 +28,145 @@ export const profile = {
   heroPortrait: heroPortraitImg,
 }
 
-// quick stats under your intro
+// Quick stats under intro (strictly from resume)
 export const heroCounts = [
-  { value: '2+', label: 'AI applications' },
   { value: '2', label: 'industry roles' },
+  { value: '2', label: 'AI applications' },
   { value: '7.65', label: 'B.Tech CGPA' },
 ]
 
 export const about = {
-  // a fanned stack of photos: click it to shuffle through your roles
   photos: [
     getAssetUrl('img/photos/portrait-tilt.jpg'),
     getAssetUrl('img/photos/portrait-profile.jpg'),
     getAssetUrl('img/photos/portrait-seated.jpg'),
     getAssetUrl('img/photos/portrait-smile.jpg')
   ],
-  // one role per photo, shown under it (click the stack to cycle)
-  roles: ['AI Application Developer', 'ML Data Associate', 'Cloud & Data Engineer', 'Python Developer'],
+  roles: ['AI & Python Developer', 'ML Data Associate', 'System Engineer Intern', 'Computer Science Graduate'],
   paragraphs: [
-    "Hi! I'm Harika, a Computer Science graduate (B.Tech, 2023) passionate about building practical AI applications, recommendation engines, and scalable data solutions in Python.",
-    "I bring hands-on experience annotating and reviewing complex machine learning training data at Amazon, and mastering Java, SQL, and database management at Infosys. I love solving real business challenges with LLMs, prompt engineering, and AWS cloud infrastructure.",
+    "I am a Computer Science graduate (B.Tech, 2023) from Qis Engineering College, Ongole, with a 7.65 CGPA, who builds practical AI applications and data solutions in Python.",
+    "My experience includes hands-on work annotating and reviewing machine learning training data at Amazon, and intensive training in Core Java, SQL, and database management at Infosys. Skilled in LLM applications, prompt engineering, and AWS cloud infrastructure, seeking an Associate AI / Data Forward Deployed Engineer role to turn real business problems into working AI and data solutions.",
   ],
   stats: [
-    { value: '7.65', label: 'B.Tech CGPA · QIS CSE' },
-    { value: '9.5', label: 'Intermediate CGPA' },
+    { value: '7.65', label: 'B.Tech CGPA · Qis Engineering College' },
+    { value: '9.5', label: 'Intermediate CGPA · Narayana Jr College' },
+    { value: '9.3', label: 'SSC CGPA · Oxford EM High School' },
     { value: '2', label: 'Industry Roles · Amazon & Infosys' },
-    { value: '2+', label: 'AI Applications Shipped' },
   ],
 }
 
-/* visual: 'gauge' | 'heatmap' | 'outfit' (illustrated art), or add image: 'img/...' */
+/* Projects directly from resume */
 export const projects = [
   {
-    title: 'AI Real Estate Aggregator',
-    tag: 'AI · Full-Stack · LLMs',
+    title: 'AI-Powered Real Estate Aggregator',
+    tag: 'Python · React · LLMs · Ollama · Leaflet.js',
     visual: 'heatmap',
     color: '#FFE5D9',
-    text: 'Intelligent real estate discovery platform in Python that aggregates listings, predicts pricing trends using K-Means clustering, and recommends matching properties based on lifestyle preferences.',
-    tech: ['Python', 'K-Means', 'Pandas', 'Flask', 'Leaflet.js'],
+    text: 'Platform concept that brings property listings from sources such as OLX and 99acres into one interface. Built an Ollama-based RAG chatbot that gives LLM-assisted property suggestions and added an interactive Leaflet.js map with hover markers.',
+    tech: ['Python', 'React', 'LLMs', 'Ollama', 'Leaflet.js'],
     link: 'https://github.com/HarikaMallavarapu/portfolio',
   },
   {
-    title: 'Geo Data Investigation',
-    tag: 'Geospatial ML · Analytics',
+    title: 'Geographical Data Investigation System',
+    tag: 'Python · K-Means Clustering',
     visual: 'gauge',
     color: '#FFF0EA',
-    text: 'High-throughput spatial data analysis pipeline that correlates regional demographics, housing densities, and geographic features for localized infrastructure and property investment insights.',
-    tech: ['Python', 'GeoPandas', 'NumPy', 'Scikit-learn', 'Folium'],
+    text: 'Application that categorizes and recommends accommodation and restaurant options for migrants. Engineered a recommendation engine in Python using K-Means clustering to filter results by budget, facilities, and distance with a simple, accessible interface.',
+    tech: ['Python', 'K-Means Clustering', 'Pandas', 'NumPy', 'Scikit-learn'],
     link: 'https://github.com/HarikaMallavarapu/portfolio',
   },
   {
-    title: 'Ollama RAG AI Assistant',
-    tag: 'GenAI · Local LLMs · RAG',
+    title: 'Ollama-based RAG Chatbot',
+    tag: 'Python · Ollama · RAG · Prompt Tuning',
     visual: 'outfit',
     color: '#FFEFE8',
-    text: 'Offline-capable Retrieval-Augmented Generation assistant powered by local Ollama models and ChromaDB, answering questions over internal engineering documentation with zero data egress.',
-    tech: ['Python', 'Ollama', 'LangChain', 'ChromaDB', 'Streamlit'],
+    text: 'Local Retrieval-Augmented Generation assistant leveraging prompt engineering, context tuning, and local Ollama model inference for private, efficient LLM-assisted discovery and recommendations.',
+    tech: ['Python', 'Ollama', 'RAG', 'Prompt Engineering', 'LLMs'],
     link: 'https://github.com/HarikaMallavarapu/portfolio',
   },
 ]
 
+/* The Story So Far (Journey): 100% verified from resume */
 export const journey = [
   {
-    year: '2024',
-    title: 'AI & Data Engineering Projects',
-    org: 'Autonomous / Research',
-    text: 'Built an AI-driven real estate recommendation engine using K-Means clustering, and developed an offline Ollama RAG chatbot using LangChain and Streamlit.',
-    photo: getAssetUrl('img/photos/portrait-hero.jpg'),
-    note: 'Shipped AI products'
-  },
-  {
-    year: '2023',
-    title: 'ML Data Associate',
-    org: 'Amazon, Hyderabad',
-    text: 'Annotated and validated multi-modal machine learning training datasets. Maintained 98%+ quality metrics across high-throughput data processing workflows.',
-    photo: getAssetUrl('img/photos/portrait-laptop.jpg'),
-    note: 'Amazon AI training data'
-  },
-  {
-    year: '2023',
-    title: 'Software Engineer Trainee',
-    org: 'Infosys (Springboard / Foundation)',
-    text: 'Mastered Core Java, SQL, Relational Database Management Systems, and Software Engineering methodologies with high-distinction evaluations.',
+    year: 'July 2025 – July 2026',
+    title: 'System Engineer Intern',
+    org: 'Infosys',
+    text: 'Completed intensive training in core Java, SQL, and advanced database management. Applied programming fundamentals, software architecture concepts, and structured problem-solving to technical exercises while strengthening SDLC and database skills for data-driven applications.',
     photo: getAssetUrl('img/photos/portrait-look.jpg'),
-    note: 'Infosys engineering excellence'
+    note: 'Infosys Internship'
   },
   {
-    year: '2023',
-    title: 'B.Tech in Computer Science',
-    org: 'QIS College of Engineering, Ongole',
-    text: 'Graduated with 7.65 CGPA. Led departmental coding initiatives, technical symposiums, and community outreach as an NSS Student Coordinator.',
+    year: 'Apr 2024 – Oct 2024',
+    title: 'Machine Learning Data Associate',
+    org: 'Amazon · Global Operations AI Associate',
+    text: 'Annotated and reviewed complex video data used to train machine learning models, improving model accuracy and decision-making. Delivered high-quality training data supporting AI models and automated operational processes, verifying labeled data for consistency and correctness in AI pipelines.',
+    photo: getAssetUrl('img/photos/portrait-laptop.jpg'),
+    note: 'Amazon AI Associate'
+  },
+  {
+    year: '2024',
+    title: 'AI & Data Solutions Projects',
+    org: 'Python · React · Ollama · K-Means',
+    text: 'Designed and built an AI-Powered Real Estate Aggregator with an Ollama-based RAG chatbot and Leaflet.js interactive map. Engineered a Geographical Data Investigation System in Python using K-Means clustering to categorize and recommend accommodation and dining options.',
+    photo: getAssetUrl('img/photos/portrait-hero.jpg'),
+    note: 'AI & ML Projects'
+  },
+  {
+    year: '2019 – 2023',
+    title: 'Bachelor of Technology (B.Tech)',
+    org: 'Qis Engineering College, Ongole',
+    text: 'Graduated in Computer Science Engineering with a 7.65 CGPA. Served as an NSS Student Coordinator organizing and executing community service and campus initiatives, and earned a Token of Appreciation from the Help to Helpless Society for continuous social contributions.',
     photo: getAssetUrl('img/photos/portrait-tilt.jpg'),
-    note: 'B.Tech CSE Graduate'
+    note: 'B.Tech CSE · 7.65 CGPA'
   },
   {
-    year: '2019',
+    year: '2017 – 2019',
     title: 'Intermediate Education',
     org: 'Narayana Jr College, Andhra Pradesh',
-    text: '2017 – 2019 · Scored 9.5 CGPA with a strong foundation in Mathematics, Physics, and Chemistry.',
+    text: 'Completed intermediate education with an outstanding 9.5 CGPA, establishing a strong foundation in analytical reasoning, mathematics, and science.',
     photo: getAssetUrl('img/photos/portrait-seated.jpg'),
-    note: '9.5 CGPA foundation'
+    note: '9.5 CGPA · Narayana'
+  },
+  {
+    year: '2016 – 2017',
+    title: 'Secondary School Certificate (SSC)',
+    org: 'Oxford EM High School, Andhra Pradesh',
+    text: 'Completed secondary school certificate (SSC) education with a 9.3 CGPA at Oxford EM High School, Andhra Pradesh.',
+    photo: getAssetUrl('img/photos/portrait-smile.jpg'),
+    note: '9.3 CGPA · Oxford'
   },
 ]
 
+/* Skills directly from resume */
 export const skills = [
-  'Python', 'Machine Learning', 'RAG', 'Ollama', 'LLM Applications', 'Prompt Tuning',
-  'Core Java', 'SQL', 'React', 'TensorFlow', 'Keras', 'Pandas', 'NumPy', 'AWS EC2',
-  'AWS S3', 'K-Means', 'Leaflet.js', 'Database Management', 'VPC', 'CloudWatch', 'IAM',
-  'Model Fine-Tuning', 'SDLC', 'Data Annotation',
+  'Python', 'Machine Learning', 'RAG', 'Ollama', 'LLM Applications',
+  'Prompt Engineering', 'Model Fine-Tuning', 'K-Means Clustering',
+  'Recommendation Systems', 'ML Training Data Annotation',
+  'Core Java', 'SQL', 'Database Management', 'React', 'Leaflet.js',
+  'TensorFlow', 'Keras', 'Pandas', 'NumPy',
+  'AWS EC2', 'AWS S3', 'VPC', 'Route 53', 'CloudFront', 'IAM', 'CloudWatch', 'CloudTrail',
+  'SDLC', 'Troubleshooting', 'Technical Communication'
 ]
 
-// Milestones scoreboard. brand = icon key from src/lib/brands.js
+// Milestones scoreboard: verified academic and technical metrics from resume
 export const scoreboard = [
-  { brand: 'python', label: 'Python & AI', note: 'algorithms & pipelines', value: 250, suffix: '+', goal: 300 },
-  { brand: 'oracle', label: 'Core Java & SQL', note: 'exercises completed', value: 350, suffix: '+', goal: 400 },
-  { brand: 'aws', label: 'AWS Cloud', note: 'services & architectures', value: 8, suffix: '+', goal: 10 },
-  { brand: 'github', label: 'Open Source', note: 'commits & contributions', value: 45, suffix: '+', goal: 50 },
+  { brand: 'python', label: 'B.Tech CGPA', note: 'Qis Engineering College, Ongole', value: 7.65, suffix: '', goal: 10 },
+  { brand: 'oracle', label: 'Intermediate', note: 'Narayana Jr College (9.5 CGPA)', value: 95, suffix: '%', goal: 100 },
+  { brand: 'github', label: 'SSC Board', note: 'Oxford EM High School (9.3 CGPA)', value: 93, suffix: '%', goal: 100 },
+  { brand: 'aws', label: 'AWS Services', note: 'EC2, S3, VPC, IAM, CloudWatch, Route 53', value: 8, suffix: '+', goal: 8 },
 ]
 
-// [title, issuer, brand icon key from src/lib/brands.js]
+// Certifications & achievements directly from resume
 export const certifications = [
-  ['Intro to Cloud Computing & Career Paths', 'IBM · Cloud Computing', 'googlecloud'],
-  ['AWS Cloud Infrastructure & Services', 'Amazon Web Services', 'aws'],
-  ['Python & Machine Learning Foundations', 'Python Software Foundation', 'python'],
-  ['Core Java & Database Management', 'Infosys', 'oracle'],
-  ['SQL & Relational Database Systems', 'Database Systems', 'mongodb'],
-  ['Software Development Life Cycle (SDLC)', 'Engineering Standards', 'github'],
-  ['NSS Student Coordinator & Leadership', 'National Service Scheme', 'cisco'],
-  ['Token of Appreciation · Social Service', 'Help to Helpless Society', 'pearson'],
+  ['Intro to Cloud Computing & Career Paths', 'Cloud Infrastructure Fundamentals', 'aws'],
+  ['Token of Appreciation', 'Help to Helpless Society · Social Contributions', 'pearson'],
+  ['NSS Student Coordinator', 'National Service Scheme · Community Initiatives', 'cisco'],
+  ['B.Tech in Computer Science Engineering', 'Qis Engineering College · 7.65 CGPA', 'github'],
+  ['Intermediate Education', 'Narayana Jr College · 9.5 CGPA', 'oracle'],
+  ['Secondary School Certificate (SSC)', 'Oxford EM High School · 9.3 CGPA', 'python'],
 ]
 
-// cut-out frames used by the hero (she turns to look at your cursor)
+// Cut-out frames used by the hero
 export const lookFrames = { from: 0, to: 28 }
 export const contactSticker = getAssetUrl('img/stickers/lg/f239.webp')
