@@ -13,17 +13,17 @@ export default function LookAt({ from, to, className = "", label = "Portrait", f
   useEffect(() => {
     const dir = innerWidth < 820 ? 'sm' : 'lg'
     const b = BASE.endsWith('/') ? BASE : `${BASE}/`
-    let loadedCount = 0
+    const mid = Math.round((to - from) / 2)
+    const order = [mid, ...Array.from({ length: to - from + 1 }, (_, i) => i).filter((i) => i !== mid)]
 
-    for (let i = from; i <= to; i++) {
+    for (const offset of order) {
+      const i = from + offset
       const im = new Image()
       im.src = `${b}img/stickers/${dir}/f${String(i).padStart(3, '0')}.webp`
       im.onload = () => {
-        loadedCount++
-        if (loadedCount >= 1) setLoaded(true)
         st.current.drawn = -1
       }
-      imgs.current[i - from] = im
+      imgs.current[offset] = im
     }
 
     const c = cv.current
@@ -63,6 +63,7 @@ export default function LookAt({ from, to, className = "", label = "Portrait", f
       const w = im.naturalWidth * k, h = im.naturalHeight * k
       ctx.clearRect(0, 0, c.width, c.height)
       ctx.drawImage(im, (c.width - w) / 2, c.height - h, w, h)
+      setLoaded(true)
     }
 
     gsap.ticker.add(tick)
