@@ -43,7 +43,18 @@ export default function Nav({ ready }) {
 
     window.addEventListener('scroll', onScroll, { passive: true })
     onScroll()
-    return () => window.removeEventListener('scroll', onScroll)
+
+    const onDocClick = (e) => {
+      if (ref.current && !ref.current.contains(e.target)) {
+        setOpen(false)
+      }
+    }
+    document.addEventListener('click', onDocClick)
+
+    return () => {
+      window.removeEventListener('scroll', onScroll)
+      document.removeEventListener('click', onDocClick)
+    }
   }, [ready])
 
   const go = (e, h) => {

@@ -13,7 +13,7 @@ export default function Skills() {
 
   const layout = (animate) => {
     const els = gsap.utils.toArray('.skill', board.current)
-    const flow = innerWidth < 700
+    const flow = innerWidth < 768
     board.current.classList.toggle('flow', flow)
     if (flow) {
       board.current.style.height = ''
