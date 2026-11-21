@@ -324,10 +324,11 @@ ol, ul { list-style: none; }
 .ab-stat span { font-size: 14.5px; color: var(--muted); font-weight: 500; }
 
 /* ═════════ Work ═════════ */
-.wk-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 26px; }
+.wk-cards { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px; }
 .wk-card {
   background: var(--white); border-radius: 28px; padding: 12px; box-shadow: var(--shadow); border: 1px solid var(--line);
   transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.4s ease, border-color 0.4s; will-change: transform;
+  cursor: pointer;
 }
 .wk-card:hover {
   transform: translateY(-8px) scale(1.01);
@@ -339,7 +340,7 @@ ol, ul { list-style: none; }
 .wk-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--white); opacity: 0.9; }
 .wk-bar i:first-child { background: var(--coral); }
 .wk-bar span { margin-left: 8px; font-size: 12px; font-weight: 600; color: var(--muted); }
-.wk-art { position: relative; aspect-ratio: 4 / 3; margin: 0 6px; border-radius: 14px; overflow: hidden; background: rgba(255, 255, 255, 0.45); transition: transform 0.4s ease; }
+.wk-art { position: relative; aspect-ratio: 16 / 10; margin: 0 6px; border-radius: 14px; overflow: hidden; background: rgba(255, 255, 255, 0.45); transition: transform 0.4s ease; }
 .wk-card:hover .wk-art { transform: scale(1.02); }
 .wk-art > img { width: 100%; height: 100%; object-fit: cover; }
 .wk-body { padding: 18px 10px 10px; display: flex; flex-direction: column; gap: 8px; }

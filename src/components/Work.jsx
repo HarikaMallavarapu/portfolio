@@ -6,24 +6,44 @@ import { Squiggle } from './Bits'
 import Wave from './Wave'
 
 const scatter = [
-  { x: 90, y: 60, r: -9 },
-  { x: 0, y: 140, r: 7 },
-  { x: -90, y: 40, r: -5 },
+  { x: 70, y: 50, r: -7 },
+  { x: -60, y: 80, r: 6 },
+  { x: 80, y: 40, r: -5 },
+  { x: -50, y: 60, r: 5 },
 ]
 
 function ProjectCard({ p, i }) {
+  const openLink = (e) => {
+    if (e.target.closest('a')) return
+    window.open(p.link, '_blank', 'noopener,noreferrer')
+  }
+
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault()
+      window.open(p.link, '_blank', 'noopener,noreferrer')
+    }
+  }
+
   return (
-    <article className="wk-card">
+    <article
+      className="wk-card is-clickable"
+      onClick={openLink}
+      onKeyDown={handleKeyDown}
+      tabIndex={0}
+      role="link"
+      aria-label={`Open project ${p.title}`}
+    >
       <div className="wk-window" style={{ background: p.color }}>
         <div className="wk-bar"><i /><i /><i /><span>{p.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}.app</span></div>
-        <div className="wk-art">{p.image ? <img src={p.image} alt={p.title} /> : <Art kind={p.visual} />}</div>
+        <div className="wk-art">{p.image ? <img src={p.image} alt={p.title} loading="lazy" /> : <Art kind={p.visual} />}</div>
       </div>
       <div className="wk-body">
         <div className="wk-top"><span className="wk-no">0{i + 1}</span><span className="wk-tag">{p.tag}</span></div>
         <h3>{p.title}</h3>
         <p>{p.text}</p>
         <div className="chips">{p.tech.map((t) => <span key={t}>{t}</span>)}</div>
-        <a className="wk-link" href={p.link} target="_blank" rel="noreferrer">View project <span>↗</span></a>
+        <a className="wk-link" href={p.link} target="_blank" rel="noreferrer" onClick={(e) => e.stopPropagation()}>View project <span>↗</span></a>
       </div>
     </article>
   )

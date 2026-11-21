@@ -55,8 +55,18 @@ export const about = {
   ],
 }
 
-/* Projects directly from resume */
+/* Projects directly from resume and portfolio work */
 export const projects = [
+  {
+    title: 'Suba Designs & Decorations',
+    tag: 'React · Tailwind CSS · Live App',
+    visual: 'outfit',
+    image: getAssetUrl('img/projects/suba-designs.webp'),
+    color: '#FFEFE8',
+    text: 'Premium web application for wedding planning and event decoration services. Features interactive service packages, luxury stage & mandap decor galleries, responsive design, and direct consultation booking.',
+    tech: ['React', 'Vite', 'Tailwind CSS', 'Responsive UI', 'Netlify'],
+    link: 'https://69c04506b8d2bc94c4ccfd21--resplendent-brigadeiros-b1109c.netlify.app/',
+  },
   {
     title: 'AI-Powered Real Estate Aggregator',
     tag: 'Python · React · LLMs · Ollama · Leaflet.js',
