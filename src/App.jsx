@@ -23,14 +23,38 @@ export default function App() {
     const dir = innerWidth < 820 ? 'sm' : 'lg'
     const t0 = performance.now()
     const b = (BASE || '/').endsWith('/') ? (BASE || '/') : `${BASE || '/'}/`
-    Promise.all([
-      document.fonts?.ready,
-      load(profile.avatar),
-      load(`${b}img/stickers/${dir}/f${String(lookFrames.from).padStart(3, '0')}.webp`),
-    ]).then(() => setTimeout(() => setLoaded(true), Math.max(0, 1500 - (performance.now() - t0))))
+
+    // Safety timeout: NEVER leave the user waiting on loader for more than 900ms
+    const safetyTimer = setTimeout(() => {
+      setLoaded(true)
+      setReady(true)
+    }, 900)
+
+    Promise.race([
+      Promise.all([
+        document.fonts?.ready || Promise.resolve(),
+        load(profile.avatar),
+        load(`${b}img/stickers/${dir}/f${String(lookFrames.from).padStart(3, '0')}.webp`),
+      ]),
+      new Promise((res) => setTimeout(res, 600)),
+    ])
+      .then(() => {
+        clearTimeout(safetyTimer)
+        setTimeout(() => setLoaded(true), Math.max(0, 400 - (performance.now() - t0)))
+      })
+      .catch(() => {
+        setLoaded(true)
+        setReady(true)
+      })
+
+    return () => clearTimeout(safetyTimer)
   }, [])
 
-  const finish = () => { setReady(true); lenis?.start(); ScrollTrigger.refresh() }
+  const finish = () => {
+    setReady(true)
+    lenis?.start()
+    ScrollTrigger.refresh()
+  }
 
   return (
     <>
